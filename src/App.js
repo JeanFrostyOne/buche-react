@@ -1,26 +1,26 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Category from "./components/Category";
-import Header from "./components/Header";
-import ProductHeading from "./components/ProductHeading";
-import Products from "./components/Products";
-import Sorting from "./components/Sorting";
-import Tags from "./components/Tags";
+
+import Home from "./pages/Home";
+import FullProduct from "./pages/FullProduct";
+import Cart from "./pages/Cart";
+import { useState } from "react";
 
 function App() {
+
   return (
     <div className="App">
-      <Header />
-      <div className="category-and-products">
-        <Category />
-        <div className="products-field">
-          <div className="app-top">
-            <ProductHeading />
-            <Sorting />
-          </div>
-          <Tags />
-          <Products />
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/:id"
+          element={<FullProduct  />}
+        />
+        <Route
+          path="/cart"
+          element={<Cart />}
+        />
+      </Routes>
     </div>
   );
 }

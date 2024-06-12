@@ -15,6 +15,12 @@ export const getTagById = (id) => {
   });
 };
 
+export function calculateTotalSumOfProducts(state) {
+  state.totalPrice = state.items.reduce((sum, elem) => {
+    return sum + elem.count * elem.price;
+  }, 0);
+}
+
 export const categories = [
   { name: "завтраки", id: 1 },
   { name: "напитки", id: 2 },
