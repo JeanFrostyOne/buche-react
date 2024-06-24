@@ -9,6 +9,24 @@ export const tags = [
   { name: "новинка", id: 6 },
 ];
 
+export const sorting = [
+  { name: "по умолчанию ↑↓", id: 1, sortBy: "", order: "" },
+  {
+    name: "по цене: от меньшей к большей ↑↓",
+    id: 2,
+    sortBy: "price",
+    order: "asc",
+  },
+  {
+    name: "по цене: от большей к меньшей ↑↓",
+    id: 3,
+    sortBy: "price",
+    order: "desc",
+  },
+  { name: "по алфавиту: а-я ↑↓", id: 4, sortBy: "name", order: "asc" },
+  { name: "по алфавиту я-а ↑↓", id: 5, sortBy: "name", order: "desc" },
+];
+
 export const getTagById = (id) => {
   return tags.find((element) => {
     return element.id === id;

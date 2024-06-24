@@ -10,8 +10,8 @@ export default function Category() {
 
   return (
     <div className="category-container">
-      <p>категории</p>
-      <ul>
+      <p className="category-text">категории</p>
+      <ul className="category-list">
         {categories.map((category) => {
           return (
             <li

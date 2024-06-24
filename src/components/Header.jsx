@@ -4,6 +4,7 @@ import profile from "../img/user-circle.svg";
 import basket from "../img/basket.svg";
 import { Link } from "react-router-dom";
 import Cart from "../pages/Cart";
+import Search from "./Search";
 
 export default function Header() {
   return (
@@ -19,6 +20,7 @@ export default function Header() {
           <li>адреса и контакты</li>
         </ul>
         <div className="header-row">
+          <Search />
           <img className="header-search" src={search} />
           <img className="header-profile" src={profile} />
           <Link to={`/cart`}>

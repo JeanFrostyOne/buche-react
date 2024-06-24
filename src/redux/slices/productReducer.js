@@ -8,6 +8,11 @@ const fetchProducts = createAsyncThunk("products/fetchProducts", (data) => {
   if (data.categoryId) {
     params.append("categoryid", data.categoryId);
   }
+  if (data.sort.sortBy && data.sort.order) {
+    params.append("sortBy", data.sort.sortBy);
+    params.append("order", data.sort.order);
+  }
+
   console.log(params);
   return fetch(`${baseUrl}/products?${params}`)
     .then((res) => res.json())
