@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseUrl } from "../../utils/constants";
+import axiosInstance from "../../axiosInstance";
 
 const initialState = {
   product: { name: "", text: "", foodvalue: [], composition: "", img: [] },
@@ -8,9 +8,8 @@ const initialState = {
 };
 
 const fetchProduct = createAsyncThunk("fullProduct/fetchProduct", (id) => {
-  return fetch(`${baseUrl}/products/${id}`)
-    .then((res) => res.json())
-    .then((data) => data);
+  return axiosInstance.get(`/products/${id}`)
+    .then((res) => res.data)
 });
 
 export const fullProductSlice = createSlice({
@@ -28,7 +27,7 @@ export const fullProductSlice = createSlice({
     });
     builder.addCase(fetchProduct.rejected, (state, action) => {
       state.loading = false;
-      state.error = "произошла ошибка на сервере";
+      state.error = action.error.message;
       state.product = {
         name: "",
         text: "",

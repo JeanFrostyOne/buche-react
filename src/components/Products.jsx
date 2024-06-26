@@ -13,22 +13,44 @@ export default function Products() {
 
   const { categoryId, sort } = useSelector((state) => state.filter);
 
+  const { tags } = useSelector((state) => state.filter);
+
   useEffect(() => {
     dispatch(fetchProducts({ categoryId, sort }));
   }, [categoryId, sort]);
-  console.log(loading);
 
   const skeletons = [...new Array(4)].map(() => <ProductSkeleton />);
 
   const { search } = useSelector((state) => state.filter);
 
   function handleSearch(arr) {
-    return arr.filter((item) =>
+    const searchArray = arr.filter((item) =>
       item.name.toUpperCase().includes(search.toUpperCase())
     );
+    if (tags.length) {
+      return searchArray.filter((item) => {
+        let itemTags = item.tags
+        let res = itemTags.filter((itemTag) => isActive(itemTag))
+        return res.length
+      })
+    } else {
+      return searchArray;
+    }
+  }
+
+  function isActive(id) {
+    let currentTag = tags.find((tag) => {
+      return tag.id === id;
+    });
+    return currentTag;
   }
 
   const filteredProducts = handleSearch(products);
+
+  if (error) {
+    return <div className="error">{error}</div>
+  }
+  
   return (
     <div className="product-container">
       {loading

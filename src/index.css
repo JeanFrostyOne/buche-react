@@ -129,6 +129,11 @@ header {
   border-radius: 15px;
   padding: 10px 15px;
   background-color: white;
+  transition: all 0.3s linear;
+}
+.tag-active {
+  background-color: black;
+  color: white;
 }
 /* product-container */
 .product-wrapper {

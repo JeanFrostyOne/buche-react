@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
-import { baseUrl } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProduct,
@@ -34,6 +33,15 @@ export default function FullProduct() {
   useEffect(() => {
     dispatch(fetchProduct(id));
   }, []);
+
+  if (error) {
+    return (
+      <div>
+        <Header />
+        <div className="error">{error}</div>;
+      </div>
+    );
+  }
 
   return (
     <div>

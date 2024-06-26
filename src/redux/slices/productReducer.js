@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseUrl } from "../../utils/constants";
+import axiosInstance from "../../axiosInstance";
 
 const initialState = { loading: false, products: [], error: "" };
 
@@ -12,11 +12,8 @@ const fetchProducts = createAsyncThunk("products/fetchProducts", (data) => {
     params.append("sortBy", data.sort.sortBy);
     params.append("order", data.sort.order);
   }
-
-  console.log(params);
-  return fetch(`${baseUrl}/products?${params}`)
-    .then((res) => res.json())
-    .then((data) => data);
+  return axiosInstance.get(`/products`, {params})
+    .then((res) => res.data)
 });
 
 export const productSlice = createSlice({
@@ -34,7 +31,7 @@ export const productSlice = createSlice({
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.loading = false;
-      state.error = "произошла ошибка на сервере";
+      state.error = action.error.message;
       state.products = [];
     });
   },
