@@ -30,6 +30,5 @@ export const filterSlice = createSlice({
 });
 
 
-
 export const { setCategoryId, setSearch, setSort, setTag } = filterSlice.actions;
 export default filterSlice.reducer;
